@@ -8,6 +8,10 @@ const Search = ({ value, onChange, children }) => (
   </div>
 );
 
+export const sum = (a, b) => {
+  return a + b;
+}
+
 const App = () => {
   const [search, setSearch] = useState("");
 
