@@ -16,10 +16,19 @@ import App, { sum } from './App';
 // });
 
 
+// describe('App', () => {
+//   it('renders App component', () => {
+//     render(<App />);
+//     // screen.debug();
+//     expect(screen.getByText(/Search:/i)).toBeInTheDocument();
+//   })
+// })
+
 describe('App', () => {
-  it('renders App component', () => {
+  it('renders App component', async () => {
+    screen.debug();
     render(<App />);
-    // screen.debug();
-    screen.getByText('Search:');
+    expect(await screen.findByText(/Logged in as/i)).toBeInTheDocument();
+    screen.debug();
   })
 })
