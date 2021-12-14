@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import App, { sum } from './App';
 
 
@@ -24,11 +24,23 @@ import App, { sum } from './App';
 //   })
 // })
 
+// describe('App', () => {
+//   it('renders App component', async () => {
+//     screen.debug();
+//     render(<App />);
+//     expect(await screen.findByText(/Logged in as/i)).toBeInTheDocument();
+//     screen.debug();
+//   })
+// })
+
 describe('App', () => {
   it('renders App component', async () => {
-    screen.debug();
     render(<App />);
-    expect(await screen.findByText(/Logged in as/i)).toBeInTheDocument();
-    screen.debug();
+    await screen.findByText(/Logged in as/i)
+    expect(screen.queryByText(/Searches for React/)).toBeNull();
+    fireEvent.change(screen.getByRole('textbox'), {
+      target: { value: 'React' }
+    })
+    expect(screen.queryByText(/Searches for React/)).toBeInTheDocument();
   })
 })
